@@ -39,9 +39,9 @@ pipeline {
 
     stages {
         stage('Deliver') {
-            when {
-                branch 'master'
-            }
+            // when {
+            //     branch 'master'
+            // }
             steps {
                 sh "curl -XPOST -H'Content-Type: application/json' -d @$HOME/gitcode/wirynote/DruidKafka/aar.json http://localhost:8081/druid/indexer/v1/supervisor"
             }
