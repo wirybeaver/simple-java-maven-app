@@ -30,6 +30,8 @@
 // }
 
 pipeline {
+    agent {}
+
     stages {
         stage('Deliver') {
             when {
