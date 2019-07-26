@@ -43,7 +43,7 @@ pipeline {
             //     branch 'master'
             // }
             steps {
-                sh 'curl -XPOST -H "Content-Type: application/json" -d aar.json http://10.136.108.55:8081/druid/indexer/v1/supervisor'
+                sh 'curl -XPOST -H "Content-Type: application/json" -d @aar.json http://10.136.108.55:8081/druid/indexer/v1/supervisor'
             }
         }
     }
