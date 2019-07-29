@@ -1,3 +1,120 @@
-{"dateTime" : "2019-08-22T00:47:05.474Z","creative_id":"90082dd4-5c2b-4256-b302-1a99e2ff785d","bid_strategy_id":"00000000-0000-0000-0000-000000000064","geo_country":"US","geo_region":"US/CA","geo_metro":"US/862","demo_age":"US:55-64","demo_education":"US:No College","demo_ethnicity":"US:Cauc.","demo_children":"US:No Children","demo_income":"US:$150k+","demo_gender":"US:Male","hashed_punit":"AQAAAQAAAAAoIA==","impressions":1}
-{"dateTime" : "2019-08-22T00:47:05.474Z","creative_id":"90082dd4-5c2b-4256-b302-1a99e2ff785d","bid_strategy_id":"00000000-0000-0000-0000-000000000064","geo_country":"US","geo_region":"US/CA","geo_metro":"US/862","demo_age":"US:55-64","demo_education":"US:No College","demo_ethnicity":"US:Cauc.","demo_children":"US:No Children","demo_income":"US:$150k+","demo_gender":"US:Male","hashed_punit":"AQAAAQAAAAAoIA==","clicks":1}
-{"dateTime" : "2019-08-22T00:47:05.474Z","creative_id":"90082dd4-5c2b-4256-b302-1a99e2ff785d","bid_strategy_id":"00000000-0000-0000-0000-000000000064","geo_country":"US","geo_region":"US/CA","geo_metro":"US/862","demo_age":"US:55-64","demo_education":"US:No College","demo_ethnicity":"US:Cauc.","demo_children":"US:No Children","demo_income":"US:$150k+","demo_gender":"US:Male","hashed_punit":"AQAAAQAAAAAoIA==","type":"site"}
+{
+  "type": "kafka",
+  "dataSchema": {
+    "dataSource": "druid_realtime",
+    "parser": {
+      "type": "string",
+      "parseSpec": {
+        "format": "json",
+        "timestampSpec": {
+          "column": "dateTime",
+          "format": "iso"
+        },
+        "columns": [
+          "dateTime",
+          "creative_id",
+          "bid_strategy_id",
+          "geo_country",
+          "geo_region",
+          "geo_metro",
+          "demo_age",
+          "demo_education",
+          "demo_ethnicity",
+          "demo_children",
+          "demo_income",
+          "demo_gender",
+          "hashed_punit",
+          "mrc_viewable",
+          "groupm_viewable",
+          "impressions",
+          "clicks"
+        ],
+        "dimensionsSpec": {
+          "dimensions": [
+            {
+              "name": "creative_id",
+              "type": "string"
+            },
+            {
+              "name": "bid_strategy_id",
+              "type": "string"
+            },
+            {
+              "name": "geo_country",
+              "type": "string"
+            },
+            {
+              "name": "geo_region",
+              "type": "string"
+            },
+            {
+              "name": "geo_metro",
+              "type": "string"
+            },
+            {
+              "name": "demo_age",
+              "type": "string"
+            },
+            {
+              "name": "demo_education",
+              "type": "string"
+            },
+            {
+              "name": "demo_ethnicity",
+              "type": "string"
+            },
+            {
+              "name": "demo_children",
+              "type": "string"
+            },
+            {
+              "name": "demo_income",
+              "type": "string"
+            },
+            {
+              "name": "demo_gender",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    "metricsSpec": [
+      {
+        "name": "impressions",
+        "type": "longSum",
+        "fieldName": "impressions"
+      },
+      {
+        "name": "clicks",
+        "type": "longSum",
+        "fieldName": "clicks"
+      },
+      {
+        "name": "hashed_punit",
+        "type": "hyperUnique",
+        "fieldName": "hashed_punit"        
+      }
+    ],
+    "granularitySpec": {
+      "type": "uniform",
+      "segmentGranularity": "HOUR",
+      "queryGranularity": "HOUR",
+      "intervals": [],
+      "rollup": true
+    }
+  },
+  "tuningConfig": {
+    "type": "kafka",
+    "reportParseExceptions": false
+  },
+  "ioConfig": {
+    "topic": "audienceReporting",
+    "replicas": 2,
+    "taskDuration": "PT10M",
+    "completionTimeout": "PT20M",
+    "consumerProperties": {
+      "bootstrap.servers": "localhost:9092"
+    }
+  }
+}
